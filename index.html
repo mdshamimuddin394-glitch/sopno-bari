@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>স্বপ্ন বাড়ি - Sopno Bari</title>
+<style>
+*{box-sizing:border-box;font-family:sans-serif}
+body{margin:0;background:#FFF7ED;padding:16px;color:#1F2937}
+.card{max-width:520px;margin:auto;background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+h1{text-align:center;color:#EA580C;margin:0;font-size:28px}
+p.sub{text-align:center;color:#666;margin:6px 0 18px}
+label{font-weight:bold;display:block;margin-top:14px;font-size:14px}
+input,select{width:100%;padding:13px;border:2px solid #E5E7EB;border-radius:12px;margin-top:6px;font-size:16px}
+button{width:100%;padding:15px;border:0;border-radius:14px;background:#EA580C;color:#fff;font-size:18px;font-weight:bold;margin-top:20px}
+.result{margin-top:20px;background:#FFFBEB;border:2px dashed #F59E0B;border-radius:16px;padding:16px;display:none}
+.result h2{margin:0;color:#92400E}
+.big{font-size:28px;font-weight:900;color:#DC2626;margin:8px 0}
+.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed #eee;font-size:14px}
+.note{font-size:12px;color:#888;text-align:center;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🏠 স্বপ্ন বাড়ি</h1>
+<p class="sub">বাংলাদেশে আপনার বাড়ি বানাতে কত টাকা লাগবে?</p>
+
+<label>জমির পরিমাণ (শতাংশ)</label>
+<input id="land" type="number" value="5" placeholder="যেমন: 5">
+
+<label>বাড়ির সাইজ (বর্গফুট)</label>
+<input id="sqft" type="number" value="1200" placeholder="যেমন: 1200">
+
+<label>কয় তলা বানাইবেন?</label>
+<select id="floor"><option value="1">১ তলা</option><option value="2" selected>২ তলা</option><option value="3">৩ তলা</option><option value="4">৪ তলা</option><option value="5">৫ তলা</option></select>
+
+<label>কেমন ফিনিশিং চান?</label>
+<select id="quality"><option value="1800">সাধারণ - ১৮০০ টাকা / sqft</option><option value="2400" selected>মাঝারি - ২৪০০ টাকা / sqft</option><option value="3200">প্রিমিয়াম - ৩২০০ টাকা / sqft</option></select>
+
+<label>আপনার এলাকায় জমির দাম (প্রতি শতাংশ)</label>
+<input id="landPrice" type="number" value="500000" placeholder="যেমন: 500000">
+
+<button onclick="calc()">হিসাব দেখুন ✨</button>
+
+<div class="result" id="res">
+<h2>আপনার হিসাব</h2>
+<div class="big" id="total"></div>
+<div class="row"><span>🏗️ বাড়ি বানানোর খরচ</span><b id="build"></b></div>
+<div class="row"><span>🌍 জমির দাম</span><b id="landCost"></b></div>
+<div class="row"><span>📐 মোট জায়গা</span><b id="totalSqft"></b></div>
+<div class="row"><span>💰 মাসে জমাইতে হইবো (৩ বছরে)</span><b id="monthly"></b></div>
+</div>
+<p class="note">* এটা আনুমানিক হিসাব। আসল খরচ এলাকা ভেদে কম-বেশি হইতে পারে।</p>
+</div>
+
+<script>
+function fmt(n){return "৳ "+Math.round(n).toLocaleString("en-IN");}
+function calc(){
+let land=+document.getElementById("land").value||0;
+let sqft=+document.getElementById("sqft").value||0;
+let floor=+document.getElementById("floor").value||1;
+let rate=+document.getElementById("quality").value||2400;
+let lp=+document.getElementById("landPrice").value||0;
+let totalSqft=sqft*floor;
+let build=totalSqft*rate;
+let landCost=land*lp;
+let total=build+landCost;
+let monthly=total/36;
+document.getElementById("res").style.display="block";
+document.getElementById("total").innerText="মোট লাগবে: "+fmt(total);
+document.getElementById("build").innerText=fmt(build);
+document.getElementById("landCost").innerText=fmt(landCost);
+document.getElementById("totalSqft").innerText=totalSqft+" sqft";
+document.getElementById("monthly").innerText=fmt(monthly);
+window.scrollTo(0,document.body.scrollHeight);
+}
+</script>
+</body>
+</html>
