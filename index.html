@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOPNO BARI - Dream Home Cost Calculator</title>
+<style>
+body{font-family:sans-serif;background:#f5f5f5;margin:0;padding:15px}
+.card{max-width:500px;margin:auto;background:white;border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.1)}
+.top-img{width:100%;display:block}
+.padding{padding:20px}
+h1{text-align:center;color:#1a3a5a;margin:10px 0 5px}
+p{text-align:center;color:#666;font-size:14px}
+label{display:block;margin-top:15px;font-weight:bold;font-size:14px}
+input,select{width:100%;padding:12px;margin-top:5px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font-size:16px}
+button{width:100%;padding:15px;margin-top:20px;background:#ff6b35;color:white;border:none;border-radius:12px;font-size:18px;font-weight:bold}
+#result{margin-top:20px;background:#e8f5e9;padding:15px;border-radius:12px;text-align:center;display:none}
+#result h2{color:#2e7d32;margin:0}
+</style>
+</head>
+<body>
+<div class="card">
+<img class="top-img" src="925252760_1463219312671573_2636379149082849776_n.webp.webp">
+<div class="padding">
+<h1>SOPNO BARI 🏠</h1>
+<p>আপনার স্বপ্নের বাড়ির খরচ হিসাব করুন</p>
+<label>জমির পরিমাণ (শতাংশ)</label>
+<input type="number" id="land" placeholder="যেমন: 5">
+<label>কত তলা বানাইবেন?</label>
+<select id="floor"><option value="1">1 তলা</option><option value="2">2 তলা</option><option value="3">3 তলা</option><option value="4">4 তলা</option><option value="5">5 তলা</option></select>
+<label>প্রতি তলায় কত স্কয়ার ফিট?</label>
+<input type="number" id="sqft" placeholder="যেমন: 1200">
+<label>কেমন ফিনিশিং চান?</label>
+<select id="quality"><option value="1800">সাধারণ - ১৮০০ টাকা / sqft</option><option value="2400">মিডিয়াম - ২৪০০ টাকা / sqft</option><option value="3200">প্রিমিয়াম - ৩২০০ টাকা / sqft</option></select>
+<button onclick="calc()">খরচ হিসাব করুন</button>
+<div id="result"><p>আনুমানিক মোট খরচ</p><h2 id="total"></h2><p style="font-size:12px">এইটা শুধু ধারণা, আসল খরচ কম-বেশি হইতে পারে</p></div>
+</div>
+</div>
+<script>
+function calc(){let f=document.getElementById('floor').value;let s=document.getElementById('sqft').value||0;let q=document.getElementById('quality').value;let total=f*s*q;document.getElementById('total').innerText=total.toLocaleString('en-IN')+' টাকা';document.getElementById('result').style.display='block';}
+</script>
+</body>
+</html>
